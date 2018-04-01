@@ -1,5 +1,6 @@
 package com.example.xyzreader.ui;
 
+import android.annotation.SuppressLint;
 import android.app.LoaderManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -14,8 +15,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateUtils;
-import android.util.TypedValue;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -43,16 +42,30 @@ public class ArticleListActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_list);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
-
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        getLoaderManager().initLoader(0, null, this);
+        setupToolbar();
+        setupSwipeRefreshLayout();
+        setupRecyclerView();
+        setupLoader();
 
         if (savedInstanceState == null) {
             refresh();
         }
+    }
+
+    private void setupToolbar() {
+        mToolbar = findViewById(R.id.toolbar);
+    }
+
+    private void setupSwipeRefreshLayout() {
+        mSwipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+    }
+
+    private void setupRecyclerView() {
+        mRecyclerView = findViewById(R.id.recycler_view);
+    }
+
+    private void setupLoader() {
+        getLoaderManager().initLoader(0, null, this);
     }
 
     private void refresh() {
@@ -136,6 +149,7 @@ public class ArticleListActivity extends AppCompatActivity implements
             return vh;
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             mCursor.moveToPosition(position);
