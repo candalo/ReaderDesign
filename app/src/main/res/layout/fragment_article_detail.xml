@@ -99,6 +99,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_share"
-        android:elevation="@dimen/fab_elevation" />
+        app:elevation="@dimen/fab_elevation"
+        app:pressedTranslationZ="@dimen/fab_pressed_elevation"/>
 
 </com.example.xyzreader.ui.DrawInsetsFrameLayout>
